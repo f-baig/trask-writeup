@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 950" role="img" aria-labelledby="title desc">
+  <title id="title">Predictive player harness flow</title>
+  <desc id="desc">A model predicts the future activation state and selects a reusable driving skill while the current skill continues driving in a real-time loop using fresh camera frames and exposed speed. Evaluator metrics are logged separately and are not shown to the player.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#53667a"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Arial, Helvetica, sans-serif; fill: #172435; }
+      .subtitle { font: 400 21px Arial, Helvetica, sans-serif; fill: #607085; }
+      .lane { font: 700 17px Arial, Helvetica, sans-serif; letter-spacing: 1.2px; }
+      .label { font: 700 25px Arial, Helvetica, sans-serif; fill: #172435; }
+      .body { font: 400 20px Arial, Helvetica, sans-serif; fill: #526278; }
+      .small { font: 400 17px Arial, Helvetica, sans-serif; fill: #68788c; }
+      .arrow { fill: none; stroke: #53667a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="900" height="950" rx="28" fill="#fbfcfe"/>
+  <text x="450" y="62" text-anchor="middle" class="title">Plan ahead while the car keeps moving</text>
+  <text x="450" y="96" text-anchor="middle" class="subtitle">Slow model calls overlap a fast, deterministic control loop.</text>
+
+  <rect x="54" y="130" width="792" height="310" rx="24" fill="#f4f7fb" stroke="#d6dee8" stroke-width="2"/>
+  <rect x="68" y="151" width="250" height="33" rx="16.5" fill="#dce9fc"/>
+  <text x="193" y="174" text-anchor="middle" class="lane" fill="#376bb4">PLANNING · OCCASIONAL</text>
+
+  <rect x="89" y="215" width="208" height="150" rx="19" fill="#ffffff" stroke="#9eb8db" stroke-width="2.5"/>
+  <text x="193" y="256" text-anchor="middle" class="label">Snapshot</text>
+  <text x="193" y="288" text-anchor="middle" class="body">camera frame</text>
+  <text x="193" y="315" text-anchor="middle" class="body">+ exposed speed</text>
+  <text x="193" y="344" text-anchor="middle" class="small">no hidden map</text>
+
+  <path d="M297 290 L345 290" class="arrow"/>
+
+  <rect x="350" y="215" width="208" height="150" rx="19" fill="#eaf2ff" stroke="#6b9de8" stroke-width="2.5"/>
+  <text x="454" y="251" text-anchor="middle" class="label">Predict</text>
+  <text x="454" y="283" text-anchor="middle" class="body">where the car will be</text>
+  <text x="454" y="310" text-anchor="middle" class="body">when the call returns</text>
+  <text x="454" y="340" text-anchor="middle" class="small">model call in flight</text>
+
+  <path d="M558 290 L606 290" class="arrow"/>
+
+  <rect x="611" y="215" width="200" height="150" rx="19" fill="#eaf2ff" stroke="#6b9de8" stroke-width="2.5"/>
+  <text x="711" y="251" text-anchor="middle" class="label">Choose skill</text>
+  <text x="711" y="283" text-anchor="middle" class="body">turn, recover,</text>
+  <text x="711" y="310" text-anchor="middle" class="body">brake or accelerate</text>
+  <text x="711" y="340" text-anchor="middle" class="small">from the skill library</text>
+
+  <rect x="54" y="475" width="792" height="388" rx="24" fill="#f2faf6" stroke="#c7e2d3" stroke-width="2"/>
+  <rect x="68" y="496" width="250" height="33" rx="16.5" fill="#d5f0e1"/>
+  <text x="193" y="519" text-anchor="middle" class="lane" fill="#2f7852">CONTROL · EVERY TICK</text>
+
+  <path d="M711 365 L711 450 L193 450 L193 570" class="arrow"/>
+  <rect x="354" y="434" width="192" height="31" rx="15.5" fill="#ffffff" stroke="#b8c5d3" stroke-width="1.5"/>
+  <text x="450" y="456" text-anchor="middle" class="small">validated skill swap</text>
+
+  <rect x="89" y="570" width="208" height="150" rx="19" fill="#e8f7ee" stroke="#62ad84" stroke-width="2.5"/>
+  <text x="193" y="611" text-anchor="middle" class="label">Active skill</text>
+  <text x="193" y="643" text-anchor="middle" class="body">reads the freshest</text>
+  <text x="193" y="670" text-anchor="middle" class="body">allowed observation</text>
+  <text x="193" y="700" text-anchor="middle" class="small">deterministic local code</text>
+
+  <path d="M297 645 L345 645" class="arrow"/>
+
+  <rect x="350" y="570" width="208" height="150" rx="19" fill="#e8f7ee" stroke="#62ad84" stroke-width="2.5"/>
+  <text x="454" y="611" text-anchor="middle" class="label">Drive</text>
+  <text x="454" y="643" text-anchor="middle" class="body">steering + throttle</text>
+  <text x="454" y="670" text-anchor="middle" class="body">at the game cadence</text>
+  <text x="454" y="700" text-anchor="middle" class="small">no network wait</text>
+
+  <path d="M558 645 L606 645" class="arrow"/>
+
+  <rect x="611" y="570" width="200" height="150" rx="19" fill="#ffffff" stroke="#8f9fb2" stroke-width="2.5"/>
+  <text x="711" y="611" text-anchor="middle" class="label">Simulator</text>
+  <text x="711" y="643" text-anchor="middle" class="body">advances physics</text>
+  <text x="711" y="670" text-anchor="middle" class="body">and renders a frame</text>
+  <text x="711" y="700" text-anchor="middle" class="small">fresh state each tick</text>
+
+  <path d="M711 720 L711 773 C711 813 193 813 193 735" class="arrow"/>
+  <rect x="337" y="775" width="226" height="31" rx="15.5" fill="#ffffff" stroke="#b8c5d3" stroke-width="1.5"/>
+  <text x="450" y="797" text-anchor="middle" class="small">next camera frame + speed</text>
+
+  <path d="M811 600 L830 600 L830 198 L193 198 L193 215" class="arrow" stroke-dasharray="8 8"/>
+
+  <path d="M811 645 L854 645 L854 884 L678 884" class="arrow" stroke-dasharray="7 7"/>
+  <rect x="371" y="848" width="307" height="68" rx="17" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="524.5" y="876" text-anchor="middle" class="label">Metrics + replay</text>
+  <text x="524.5" y="902" text-anchor="middle" class="small">evaluator only · never shown to player</text>
+</svg>
